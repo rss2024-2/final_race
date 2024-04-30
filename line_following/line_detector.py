@@ -47,6 +47,7 @@ class LineDetector(Node):
         # pixel location in the image.
         # vvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
         #################################
+
         image = self.bridge.imgmsg_to_cv2(image_msg, "bgr8")
         bounding_box = cd_color_segmentation(image, None)
         middle_x = (bounding_box[0][0] + bounding_box[1][0])/2
@@ -64,13 +65,14 @@ class LineDetector(Node):
         color = image_hsv[int(middle_y)][int(middle_x)]
         image = cv2.putText(image, np.array2string(color), (bounding_box[0][0], bounding_box[0][1] - 10),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 1, cv2.LINE_AA)
-        
+    
+
         debug_msg = self.bridge.cv2_to_imgmsg(image, "bgr8")
         self.debug_pub.publish(debug_msg)
 
 def main(args=None):
     rclpy.init(args=args)
-    cone_detector = ConeDetector()
+    cone_detector = LineDetector()
     rclpy.spin(cone_detector)
     rclpy.shutdown()
 
