@@ -54,9 +54,9 @@ def cd_color_segmentation(img, template):
 		best_contour = max(contours, key=cv2.contourArea) # Choose contour of largest area
 		x,y,w,h = cv2.boundingRect(best_contour)
 		bounding_box = ((x,y), (x+w, y+h))
-		return bounding_box
+		return (bounding_box, thresholded_image)
 
 
-	return ((0,0),(0,0))
+	return ((0,0),(0,0), thresholded_image)
 
 	

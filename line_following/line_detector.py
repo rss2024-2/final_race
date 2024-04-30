@@ -49,7 +49,8 @@ class LineDetector(Node):
         #################################
 
         image = self.bridge.imgmsg_to_cv2(image_msg, "bgr8")
-        bounding_box = cd_color_segmentation(image, None)
+        bounding_box = cd_color_segmentation(image, None)[0]
+        thresholded_image = cd_color_segmentation(image, None)[1]
         middle_x = (bounding_box[0][0] + bounding_box[1][0])/2
         middle_y = (bounding_box[0][1] + bounding_box[1][1])/2
         lower_y = bounding_box[1][1]
@@ -67,7 +68,7 @@ class LineDetector(Node):
                         cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 1, cv2.LINE_AA)
     
 
-        debug_msg = self.bridge.cv2_to_imgmsg(image, "bgr8")
+        debug_msg = self.bridge.cv2_to_imgmsg(thresholded_image, "bgr8")
         self.debug_pub.publish(debug_msg)
 
 def main(args=None):
