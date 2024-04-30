@@ -15,14 +15,14 @@ from vs_msgs.msg import ConeLocationPixel
 from line_following.color_segmentation import cd_color_segmentation
 
 
-class ConeDetector(Node):
+class LineDetector(Node):
     """
     A class for applying your cone detection algorithms to the real robot.
     Subscribes to: /zed/zed_node/rgb/image_rect_color (Image) : the live RGB image from the onboard ZED camera.
     Publishes to: /relative_cone_px (ConeLocationPixel) : the coordinates of the cone in the image frame (units are pixels).
     """
     def __init__(self):
-        super().__init__("cone_detector")
+        super().__init__("line_detector")
         # toggle line follower vs cone parker
         self.LineFollower = True
 
