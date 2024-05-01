@@ -13,8 +13,36 @@ import numpy as np
 #  v
 ###############################################################
 
-lower_orange = np.array([4, 190, 60])
-high_orange = np.array([15, 255, 255])
+def nothing(x):
+    pass
+
+# Create a window named trackbars.
+cv2.namedWindow("Trackbars")
+
+# Now create 6 trackbars that will control the lower and upper range of 
+# H,S and V channels. The Arguments are like this: Name of trackbar, 
+# window name, range,callback function. For Hue the range is 0-179 and
+# for S,V its 0-255.
+cv2.createTrackbar("L - H", "Trackbars", 0, 179, nothing)
+cv2.createTrackbar("L - S", "Trackbars", 0, 255, nothing)
+cv2.createTrackbar("L - V", "Trackbars", 0, 255, nothing)
+cv2.createTrackbar("U - H", "Trackbars", 179, 179, nothing)
+cv2.createTrackbar("U - S", "Trackbars", 255, 255, nothing)
+cv2.createTrackbar("U - V", "Trackbars", 255, 255, nothing)
+
+l_h = cv2.getTrackbarPos("L - H", "Trackbars")
+l_s = cv2.getTrackbarPos("L - S", "Trackbars")
+l_v = cv2.getTrackbarPos("L - V", "Trackbars")
+u_h = cv2.getTrackbarPos("U - H", "Trackbars")
+u_s = cv2.getTrackbarPos("U - S", "Trackbars")
+u_v = cv2.getTrackbarPos("U - V", "Trackbars")
+
+# lower_orange = np.array([4, 190, 60])
+# high_orange = np.array([15, 255, 255])
+
+lower_orange = np.array([l_h, l_s, l_v])
+high_orange = np.array([u_h, u_s, u_v])
+
 MIN_CONTOUR_AREA = 200
 
 def image_print(img):
