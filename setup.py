@@ -20,7 +20,10 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'line_detector = line_following.line_detector:main',
+            'line_detector = final_race.line_following.line_detector:main',
+            'homography_transformer = final_race.line_following.homography_transformer:main',
+            'hough_follower = final_race.line_following.hough_follower:main',
+            'pure_pursuit = final_race.pure_pursuit:main'
         ],
     },
 )
